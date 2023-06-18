@@ -1,0 +1,99 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: lniguide_en.aux
+The style file: lni.bst
+Illegal, another \bibstyle command---line 34 of file lniguide_en.aux
+ : \bibstyle
+ :          {lnig}
+I'm skipping whatever remains of this command
+Database file #1: lniguide.bib
+title$ is an unknown function---line 1057 of file lni.bst
+ptr=1, stack=
+A
+---the literal stack isn't empty for entry Az09
+while executing---line 1252 of file lni.bst
+ptr=1, stack=
+W
+---the literal stack isn't empty for entry Wa14
+while executing---line 1252 of file lni.bst
+ptr=1, stack=
+W
+---the literal stack isn't empty for entry Wa14b
+while executing---line 1252 of file lni.bst
+Warning--to sort, need author or key in GI14
+Warning--to sort, need author or key in XX14
+ptr=1, stack=
+
+---the literal stack isn't empty for entry AB00
+while executing---line 1319 of file lni.bst
+ptr=1, stack=
+
+---the literal stack isn't empty for entry ABC01
+while executing---line 1319 of file lni.bst
+ptr=1, stack=
+
+---the literal stack isn't empty for entry XX14
+while executing---line 1319 of file lni.bst
+Warning--can't use both author and editor fields in Az09
+ptr=1, stack=
+
+---the literal stack isn't empty for entry Az09
+while executing---line 1319 of file lni.bst
+ptr=1, stack=
+
+---the literal stack isn't empty for entry Ez10
+while executing---line 1319 of file lni.bst
+ptr=1, stack=
+
+---the literal stack isn't empty for entry Gl06
+while executing---line 1319 of file lni.bst
+ptr=1, stack=
+
+---the literal stack isn't empty for entry Wa14
+while executing---line 1319 of file lni.bst
+ptr=1, stack=
+
+---the literal stack isn't empty for entry Wa14b
+while executing---line 1319 of file lni.bst
+You've used 9 entries,
+            2538 wiz_defined-function locations,
+            624 strings with 5289 characters,
+and the built_in function-call counts, 3170 in all, are:
+= -- 292
+> -- 145
+< -- 6
++ -- 47
+- -- 45
+* -- 199
+:= -- 503
+add.period$ -- 19
+call.type$ -- 9
+change.case$ -- 43
+chr.to.int$ -- 8
+cite$ -- 12
+duplicate$ -- 141
+empty$ -- 255
+format.name$ -- 54
+if$ -- 679
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 12
+newline$ -- 40
+num.names$ -- 25
+pop$ -- 72
+preamble$ -- 1
+purify$ -- 61
+quote$ -- 0
+skip$ -- 135
+stack$ -- 0
+substring$ -- 134
+swap$ -- 26
+text.length$ -- 6
+text.prefix$ -- 5
+top$ -- 0
+type$ -- 52
+warning$ -- 3
+while$ -- 27
+width$ -- 11
+write$ -- 101
+(There were 13 error messages)

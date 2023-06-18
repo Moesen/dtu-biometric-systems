@@ -1,0 +1,65 @@
+\documentclass[english]{lni}
+
+\IfFileExists{latin1.sty}{\usepackage{latin1}}{\usepackage{isolatin1}}  % comment out this line for compilation with e.g. overleaf
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{listings} %if lstlistings is used
+\usepackage{changepage} %for changing topmargin on first page
+\usepackage[figurename=Fig., tablename=Tab., small]{caption}[2008/04/01]
+\renewcommand{\lstlistingname}{List.}    % Listingname is now List. 
+
+\fancypagestyle{titlepage}{
+\fancyhead[RO]{\small N. Damer,  M. Gomez-Barrero,  K. Raja,  C. Rathgeb,  A.  Sequeira,\linebreak  M. Todisco,  and A. Uhl (Eds.): BIOSIG 2023, \linebreak Lecture Notes in Informatics (LNI), Gesellschaft f\"ur Informatik, Bonn 2023} % do NOT modify these lines
+\fancyfoot{}}
+
+%Beginning of page count for this paper
+\setcounter{page}{1}
+
+%head line settings
+\pagestyle{fancy}
+\fancyhead{} % clears the settings
+\fancyfoot{} % clears footer settings
+\renewcommand{\headrulewidth}{0.4pt} %horizontal line below header
+\setcounter{footnote}{0}
+
+\author{Gustav Moesmand\footnote{DTU, Compute, Address1, Place1, s174169@dtu.dk}}
+\title{Face Beauty Score Implementation (FBI)}
+\begin{document}
+\maketitle
+% Abstract
+\renewcommand{\refname}{References}
+\setcounter{footnote}{2} %Change to the number of authors for a correct numbering of the foot notes
+\thispagestyle{titlepage}
+%header setting after the second page
+\pagestyle{fancy}
+\fancyhead{} % clears header settings
+\fancyhead[RO]{\small Short title of your work \hspace{25pt}  \hspace{0.05cm}}
+\fancyhead[LE]{\hspace{0.05cm}\small  \hspace{25pt} Firstname1 Lastname1 and Firstname2 Lastname2}
+\fancyfoot{} % clears all footer settings
+\renewcommand{\headrulewidth}{0.4pt} %line below header
+
+\begin{abstract}
+	The \LaTeX-Class \texttt{lni} uses the layout for articles in LNI. This document describes the usage of the \LaTeX-Class and gives some examples. This abstract should give a short overview about your work and can have between 70 and 150 words. The formatting will be done automatically within the abstract area.
+\end{abstract}
+\begin{keywords}
+	LNI Guidelines, \LaTeX Template. The formatting will be done automatically within the keywords-Range.
+\end{keywords}
+
+\section{Introduction}
+
+\section{Related Work}
+
+\section{Main body}
+\subsection{Background}
+\subsection{Methodology}
+\subsection{Litterature Survey}
+\subsection{Experimental evaluation}
+\subsubsection{Results}
+\subsubsection{Discussion}
+
+\section{Conclusion}
+
+
+
+\end{document}
