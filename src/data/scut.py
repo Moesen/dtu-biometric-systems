@@ -1,4 +1,5 @@
 import numpy as np
+from typing import Tuple
 import pathlib
 from src import REPO_ROOT
 import os
@@ -7,39 +8,105 @@ import argparse
 from PIL import Image
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from dataclasses import dataclass
 
 
-class Dataset:
+class ScutImgInfo:
     def __init__(
-        self, img_path: str | pathlib.Path, point_path: str | pathlib.Path
+        self,
+        img_path: str | pathlib.Path,
+        point_path: str | pathlib.Path,
+        fs: float,
     ) -> None:
         self.img_path = img_path
         self.point_path = point_path
-        self.file_names = list(
-            map(lambda x: x.replace(".jpg", ""), os.listdir(img_path))
+        self.fs = fs
+
+class FacialRatio:
+    def __init__(self) -> None:
+        self.under_eyes_interocular = self.euclid(49, 57) / self.euclid(43, 55)
+        self.under_eyes_nose_width = self.euclid(49, 57) / self.euclid(65, 59)
+        self.mouth_width_interocular = self.euclid(80, 87) / self.euclid(43, 55)
+        self.upper_lip_jaw_interocular = self.euclid(77, 12) / self.euclid(43, 55)
+        self.upper_lip_jaw_nose_width = self.euclid(77, 12) / self.euclid(65, 59)
+        self.interocular_lip_height = self.euclid(43, 55) / self.euclid(77, 83)
+        self.nose_width_interocular = self.euclid(65, 69) / self.euclid(43, 55)
+        self.nose_width_upper_lip_height = self.euclid(65, 69) / self.euclid(77, 84) / 2
+        self.interocular_nose_mouth_height = self.euclid(43, 55) / self.euclid(67, 77)
+        self.face_top_eyebrows_eyebrows_nose = self.euclid(
+            1, self.euclid(23, 37) / 2
+        ) / self.euclid(self.euclid(23, 37) / 2, 67)
+        self.eyebrows_nose_nose_jaw = self.euclid(self.euclid(23, 37) / 2, 67) / self.euclid(
+            67, 12
         )
-        print(len(self.file_names), self.file_names[0:5])
+        self.face_top_eyebrows_nose_jaw = self.euclid(
+            1, self.euclid(23, 37) / 2
+        ) / self.euclid(67, 12)
+        self.interocular_nose_width = self.euclid(43, 55) / self.euclid(65, 69)
+        self.face_height_face_width = self.euclid(1, 12) / self.euclid(7, 17)
+
+class FacialFeatures:
+    def __init__(self, landmarks: np.ndarray) -> None:
+
+    def euclid(self, i, j) -> float:
+
+
+
+
+@dataclass
+class ScutImgLoaded:
+    img: Image.Image
+    landmarks: np.ndarray
+    fs: float
+    name: str
+
+
+class ScutDataset:
+    def __init__(
+        self,
+        img_path: str | pathlib.Path,
+        point_path: str | pathlib.Path,
+        fs_path: str | pathlib.Path,
+    ) -> None:
+        img_path = img_path
+        point_path = point_path
+        file_names = list(map(lambda x: x.replace(".jpg", ""), os.listdir(img_path)))
+        fs_scores = {}
+        for line in open(fs_path).read().splitlines():
+            a, b = line.split()
+            fs_scores[a.replace(".jpg", "")] = float(b)
+
+        self.ScutImgInfos = []
+        for fn in file_names:
+            self.ScutImgInfos.append(
+                ScutImgInfo(
+                    os.path.join(img_path, f"{fn}.jpg"),
+                    os.path.join(
+                        point_path,
+                        f"{fn}.txt",
+                    ),
+                    fs_scores[fn],
+                )
+            )
+
+    def __getitem__(self, idx) -> ScutImgLoaded:
+        info = self.ScutImgInfos[idx]
+        ip, pp, fs = info.img_path, info.point_path, info.fs
+        img = Image.open(ip)
+        with open(pp, "r") as f:
+            points = np.array(
+                [[*map(float, x.split(" "))] for x in f.read().splitlines()]
+            )
+        return ScutImgLoaded(img, points, fs, ip.split("/")[-1].replace(".jpg", ""))
 
     def display(self, idx: int, show_points: bool = True):
-        fp = os.path.join(self.img_path, f"{self.file_names[idx]}.jpg")
-        img = Image.open(fp)
+        scut = self[idx]
 
-        plt.imshow(img)
+        plt.imshow(scut.img)
         if show_points:
-            plt.scatter(*self._load_points(idx).transpose())
+            plt.scatter(*scut.landmarks.transpose())
+        plt.title(f"{scut.name=}: {scut.fs=}")
         plt.show()
-
-    def _load_points(self, idx: int) -> np.ndarray:
-        fp = os.path.join(self.point_path, f"{self.file_names[idx]}.txt")
-        with open(fp, "r") as f:
-            data = f.read()
-        data_rows = data.splitlines()
-        arr = np.zeros((len(data_rows), 2), dtype=np.float32)
-        for i, row in enumerate(data_rows):
-            x, y = map(float, row.split())
-            arr[i, 0] = x
-            arr[i, 1] = y
-        return arr
 
 
 def pts2txt(din, dout, src):
@@ -66,6 +133,7 @@ class ArgSpace:
     points_path: str
     output_path: str
     img_path: str
+    fs_path: str
     mode: str
 
 
@@ -78,6 +146,7 @@ if __name__ == "__main__":
         "--output_path",
         help="path to folder, where .txt files should be stored",
     )
+    parser.add_argument("-f", "--fs_path", help="Path to fs file")
     parser.add_argument("-m", "--mode", required=True, help=f"Options: {modes}")
     parser.add_argument("-i", "--img_path", help="Path to images")
     args = parser.parse_args(namespace=ArgSpace)
@@ -89,7 +158,7 @@ if __name__ == "__main__":
             pts2txt(args.points_path, args.output_path, fn)
         print(f"Done with conversion. Saved to {args.output_path}")
     elif args.mode == "datatest":
-        ds = Dataset(args.img_path, args.points_path)
+        ds = ScutDataset(args.img_path, args.points_path, args.fs_path)
         ds.display(0)
     else:
         raise Exception(f"Expected one of the modes: {modes}")
