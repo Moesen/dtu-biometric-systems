@@ -22,36 +22,6 @@ class ScutImgInfo:
         self.point_path = point_path
         self.fs = fs
 
-class FacialRatio:
-    def __init__(self) -> None:
-        self.under_eyes_interocular = self.euclid(49, 57) / self.euclid(43, 55)
-        self.under_eyes_nose_width = self.euclid(49, 57) / self.euclid(65, 59)
-        self.mouth_width_interocular = self.euclid(80, 87) / self.euclid(43, 55)
-        self.upper_lip_jaw_interocular = self.euclid(77, 12) / self.euclid(43, 55)
-        self.upper_lip_jaw_nose_width = self.euclid(77, 12) / self.euclid(65, 59)
-        self.interocular_lip_height = self.euclid(43, 55) / self.euclid(77, 83)
-        self.nose_width_interocular = self.euclid(65, 69) / self.euclid(43, 55)
-        self.nose_width_upper_lip_height = self.euclid(65, 69) / self.euclid(77, 84) / 2
-        self.interocular_nose_mouth_height = self.euclid(43, 55) / self.euclid(67, 77)
-        self.face_top_eyebrows_eyebrows_nose = self.euclid(
-            1, self.euclid(23, 37) / 2
-        ) / self.euclid(self.euclid(23, 37) / 2, 67)
-        self.eyebrows_nose_nose_jaw = self.euclid(self.euclid(23, 37) / 2, 67) / self.euclid(
-            67, 12
-        )
-        self.face_top_eyebrows_nose_jaw = self.euclid(
-            1, self.euclid(23, 37) / 2
-        ) / self.euclid(67, 12)
-        self.interocular_nose_width = self.euclid(43, 55) / self.euclid(65, 69)
-        self.face_height_face_width = self.euclid(1, 12) / self.euclid(7, 17)
-
-class FacialFeatures:
-    def __init__(self, landmarks: np.ndarray) -> None:
-
-    def euclid(self, i, j) -> float:
-
-
-
 
 @dataclass
 class ScutImgLoaded:
@@ -70,7 +40,13 @@ class ScutDataset:
     ) -> None:
         img_path = img_path
         point_path = point_path
-        file_names = list(map(lambda x: x.replace(".jpg", ""), os.listdir(img_path)))
+        point_files = os.listdir(point_path)
+        file_names = list(
+            filter(
+                lambda x: any(x in y for y in point_files),
+                map(lambda x: x.replace(".jpg", ""), os.listdir(img_path)),
+            )
+        )
         fs_scores = {}
         for line in open(fs_path).read().splitlines():
             a, b = line.split()
@@ -98,6 +74,13 @@ class ScutDataset:
                 [[*map(float, x.split(" "))] for x in f.read().splitlines()]
             )
         return ScutImgLoaded(img, points, fs, ip.split("/")[-1].replace(".jpg", ""))
+
+    def __iter__(self):
+        for x in range(len(self)):
+            yield self[x]
+
+    def __len__(self) -> int:
+        return len(self.ScutImgInfos)
 
     def display(self, idx: int, show_points: bool = True):
         scut = self[idx]
