@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.10.21)  9 JUN 2023 10:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.12)  27 JUN 2023 11:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -46,9 +46,9 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language42). Reported on input line 105.
+(babel)             (\language48). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language42). Reported on input line 108.
+(babel)             (\language48). Reported on input line 108.
 ) (/usr/share/texlive/texmf-dist/tex/generic/babel-german/ngerman.ldf
 Language: ngerman 2021/02/27 v2.13 German support for babel (post-1996 orthography)
  (/usr/share/texlive/texmf-dist/tex/generic/babel-german/ngermanb.ldf
@@ -325,14 +325,10 @@ Overfull \hbox (9.69228pt too wide) in paragraph at lines 299--300
 \OT1/cmtt/m/n/10 inproceedings\OT1/ptm/m/n/10 , \OT1/cmtt/m/n/10 article\OT1/ptm/m/n/10 , \OT1/cmtt/m/n/10 online \OT1/ptm/m/n/10 and \OT1/cmtt/m/n/10 misc\OT1/ptm/m/n/10 . You will find ex-am-ples in the \OT1/cmtt/m/n/10 lniguide.bib
  []
 
-[6] (build/lniguide_en.bbl [7]) [8] (build/lniguide_en.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[6] (build/lniguide_en.bbl [7]) [8] (build/lniguide_en.aux) ) 
 Here is how much of TeX's memory you used:
  5879 strings out of 478287
- 96666 string characters out of 5849288
+ 96666 string characters out of 5849289
  405862 words of memory out of 5000000
  24017 multiletter control sequences out of 15000+600000
  504349 words of font info for 93 fonts, out of 8000000 for 9000

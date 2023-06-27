@@ -10,7 +10,7 @@
 \renewcommand{\lstlistingname}{List.}    % Listingname is now List. 
 
 \fancypagestyle{titlepage}{
-\fancyhead[RO]{\small N. Damer,  M. Gomez-Barrero,  K. Raja,  C. Rathgeb,  A.  Sequeira,\linebreak  M. Todisco,  and A. Uhl (Eds.): BIOSIG 2023, \linebreak Lecture Notes in Informatics (LNI), Gesellschaft f\"ur Informatik, Bonn 2023} % do NOT modify these lines
+\fancyhead[RO]{} % do NOT modify these lines
 \fancyfoot{}}
 
 %Beginning of page count for this paper
@@ -23,10 +23,12 @@
 \renewcommand{\headrulewidth}{0.4pt} %horizontal line below header
 \setcounter{footnote}{0}
 
-\author{Gustav Moesmand\footnote{DTU, Compute, Address1, Place1, s174169@dtu.dk}}
+\author{Gustav Moesmand\footnote{DTU, Compute, s174169@dtu.dk}}
 \title{Face Beauty Score Implementation (FBI)}
 \begin{document}
 \maketitle
+\cite[test]{j_iyer_machine_2021}
+
 % Abstract
 \renewcommand{\refname}{References}
 \setcounter{footnote}{2} %Change to the number of authors for a correct numbering of the foot notes
@@ -43,24 +45,67 @@
 	The \LaTeX-Class \texttt{lni} uses the layout for articles in LNI. This document describes the usage of the \LaTeX-Class and gives some examples. This abstract should give a short overview about your work and can have between 70 and 150 words. The formatting will be done automatically within the abstract area.
 \end{abstract}
 \begin{keywords}
-	LNI Guidelines, \LaTeX Template. The formatting will be done automatically within the keywords-Range.
 \end{keywords}
 
+Investigate the literature from psychology, medicine and pattern recognition
+for face beauty scoring methods
+
 \section{Introduction}
-this is a test of how the report looks
+In the recent years, artificially generated media (images, video, sound, etc.) has seen a noticable increase in production. This can in large part be attributed to the steady grow of better computers as well as more stuff.
 
-\section{Related Work}
+One area that has been getting a lot of notice is AI-generated images. This can be seen in multiple big software solutions such as [Names i don't remember right now]. With this rise, it has become more important to enable software to have some idea of the likelyhood of an image being a fake or real.
 
-\section{Main body}
-\subsection{Background}
-\subsection{Methodology}
-\subsection{Litterature Survey}
-\subsection{Experimental evaluation}
-\subsubsection{Results}
-\subsubsection{Discussion}
+As seen in ref[humans more beutiful huehue] humans tend to score higher on attractivness with more symmetric faces. This is further investigated in ref[] that comes to some conclusion.
 
-\section{Conclusion}
+With the enormous amounts of images being produced by GAN's and published on the interent, multiple sources worry that this could lead to a detereoration in results using AI, as the generated content might be slightly misleading.
 
+To mitigate this, this survey will instead look at handcrafcted approaches that take spring from research regarding what parameters humans value other humans attractivness based on.
 
+First a taxonomy is introduced expanding on the already established ISO[...] for describing compute-related tasks. Then an implementation of a current solution for a hand-crafted approach will be used. Lastly a survey of current handcrafted solutions will be shown, comparing several current solutions in there established benefits, speeds and more.
+
+Lastly a comparison between the chosen implementation and surveyed implementation will be reviewed pondering on the benefits of the chosen solution as well as its weaknesses.
+
+\section{Background}
+This section gives an overview of background information regarding. Section \ref{nomenclature} explains relevant concepts and their background for stuff not covered by the 
+\subsection{Nomenclature}\label{nomenclature}
+
+\section{Methodology}
+\section{Litterature Survey}
+\section{Experimental evaluation}
+From the handcrafted approaches it was determined, that \cite[]{j_iyer_machine_2021} implemented a good hybrid between hand-crafted features and using machine-learning to heighten the applicability.
+The implementation of the approach was derived from instructions in their paper, although some things were not clear, and were therefor guesstimated.
+
+The solution uses the following pipeline:
+\begin{enumerate}
+    \item Querry image
+    \item Extract features from this image
+        \subitem Facial landmarks
+        \subitem Texture
+        \subitem Color
+        \subitem Shape
+    \item Gather extracted features in one vector
+    \item Use feature-vector as input to different machine-learning-models
+\end{enumerate}
+
+All features are handcrafted and based on solid research into what constitutes a pretty face seen from a human standpoint.
+
+\subsection{Extracting features}
+This section will discuss the different features extracted, how they are calculated and why they are used.
+
+\subsubsection{Facial landmarks}
+
+\subsubsection{Texture}
+
+\subsubsection{Color}
+
+\subsubsection{Shape}
+
+\subsection{Models}
+
+\subsection{Results}
+
+\section{Discussion}
+
+\bibliography{biometrics}
 
 \end{document}
